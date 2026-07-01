@@ -14,16 +14,329 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      caring_events: {
+        Row: {
+          created_at: string
+          day: string
+          dismissed: boolean
+          id: string
+          kind: string
+          payload: Json
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          day?: string
+          dismissed?: boolean
+          id?: string
+          kind: string
+          payload?: Json
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          day?: string
+          dismissed?: boolean
+          id?: string
+          kind?: string
+          payload?: Json
+          user_id?: string
+        }
+        Relationships: []
+      }
+      chat_messages: {
+        Row: {
+          created_at: string
+          id: string
+          parts: Json
+          role: string
+          thread_id: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          parts: Json
+          role: string
+          thread_id: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          parts?: Json
+          role?: string
+          thread_id?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "chat_messages_thread_id_fkey"
+            columns: ["thread_id"]
+            isOneToOne: false
+            referencedRelation: "chat_threads"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      chat_threads: {
+        Row: {
+          created_at: string
+          id: string
+          title: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          title?: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          title?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      email_drafts: {
+        Row: {
+          body: string
+          created_at: string
+          id: string
+          purpose: string
+          recipient_type: string
+          subject: string
+          tone: string
+          user_id: string
+        }
+        Insert: {
+          body: string
+          created_at?: string
+          id?: string
+          purpose: string
+          recipient_type: string
+          subject: string
+          tone: string
+          user_id: string
+        }
+        Update: {
+          body?: string
+          created_at?: string
+          id?: string
+          purpose?: string
+          recipient_type?: string
+          subject?: string
+          tone?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      focus_sessions: {
+        Row: {
+          duration_seconds: number | null
+          ended_at: string | null
+          id: string
+          preset: string
+          started_at: string
+          user_id: string
+        }
+        Insert: {
+          duration_seconds?: number | null
+          ended_at?: string | null
+          id?: string
+          preset: string
+          started_at?: string
+          user_id: string
+        }
+        Update: {
+          duration_seconds?: number | null
+          ended_at?: string | null
+          id?: string
+          preset?: string
+          started_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      meeting_summaries: {
+        Row: {
+          action_items: Json
+          created_at: string
+          id: string
+          raw_notes: string
+          summary_md: string
+          title: string
+          user_id: string
+        }
+        Insert: {
+          action_items?: Json
+          created_at?: string
+          id?: string
+          raw_notes: string
+          summary_md: string
+          title: string
+          user_id: string
+        }
+        Update: {
+          action_items?: Json
+          created_at?: string
+          id?: string
+          raw_notes?: string
+          summary_md?: string
+          title?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      profiles: {
+        Row: {
+          calendar_connected: boolean
+          created_at: string
+          display_name: string | null
+          focus_preset: string | null
+          id: string
+          timezone: string | null
+          updated_at: string
+        }
+        Insert: {
+          calendar_connected?: boolean
+          created_at?: string
+          display_name?: string | null
+          focus_preset?: string | null
+          id: string
+          timezone?: string | null
+          updated_at?: string
+        }
+        Update: {
+          calendar_connected?: boolean
+          created_at?: string
+          display_name?: string | null
+          focus_preset?: string | null
+          id?: string
+          timezone?: string | null
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      research_items: {
+        Row: {
+          created_at: string
+          id: string
+          insights: Json
+          keywords: string[]
+          source_ref: string | null
+          source_type: string
+          summary_md: string
+          title: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          insights?: Json
+          keywords?: string[]
+          source_ref?: string | null
+          source_type: string
+          summary_md: string
+          title: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          insights?: Json
+          keywords?: string[]
+          source_ref?: string | null
+          source_type?: string
+          summary_md?: string
+          title?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      tasks: {
+        Row: {
+          completed_at: string | null
+          created_at: string
+          due_at: string | null
+          estimated_minutes: number | null
+          id: string
+          notes: string | null
+          priority: string
+          source: string
+          status: string
+          title: string
+          user_id: string
+        }
+        Insert: {
+          completed_at?: string | null
+          created_at?: string
+          due_at?: string | null
+          estimated_minutes?: number | null
+          id?: string
+          notes?: string | null
+          priority?: string
+          source?: string
+          status?: string
+          title: string
+          user_id: string
+        }
+        Update: {
+          completed_at?: string | null
+          created_at?: string
+          due_at?: string | null
+          estimated_minutes?: number | null
+          id?: string
+          notes?: string | null
+          priority?: string
+          source?: string
+          status?: string
+          title?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      user_roles: {
+        Row: {
+          created_at: string
+          id: string
+          role: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          role?: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          role?: Database["public"]["Enums"]["app_role"]
+          user_id?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      has_role: {
+        Args: {
+          _role: Database["public"]["Enums"]["app_role"]
+          _user_id: string
+        }
+        Returns: boolean
+      }
     }
     Enums: {
-      [_ in never]: never
+      app_role: "admin" | "user"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -150,6 +463,8 @@ export type CompositeTypes<
 
 export const Constants = {
   public: {
-    Enums: {},
+    Enums: {
+      app_role: ["admin", "user"],
+    },
   },
 } as const
