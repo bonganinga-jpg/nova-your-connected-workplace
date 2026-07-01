@@ -113,7 +113,7 @@ export const updateTask = createServerFn({ method: "POST" })
     }),
   }).parse(d))
   .handler(async ({ data, context }) => {
-    const patch: Record<string, unknown> = { ...data.patch };
+    const patch = { ...data.patch } as typeof data.patch & { completed_at?: string | null };
     if (data.patch.status === "done") patch.completed_at = new Date().toISOString();
     if (data.patch.status && data.patch.status !== "done") patch.completed_at = null;
     const { data: row, error } = await context.supabase.from("tasks").update(patch)
