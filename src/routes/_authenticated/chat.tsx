@@ -50,7 +50,7 @@ function ChatPage() {
     id: activeId ?? "new",
     transport: new DefaultChatTransport({
       api: "/api/chat",
-      headers: () => (token ? { Authorization: `Bearer ${token}` } : {}),
+      headers: () => (token ? { Authorization: `Bearer ${token}` } : ({} as Record<string, string>)),
       body: () => ({ threadId: activeId }),
     }),
     onError: (e) => toast.error(e.message || "Nova hit an error."),

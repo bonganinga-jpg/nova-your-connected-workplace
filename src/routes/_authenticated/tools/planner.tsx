@@ -41,7 +41,7 @@ function PlannerPage() {
   });
 
   const upd = useMutation({
-    mutationFn: (v: Parameters<typeof updateTask>[0]["data"]) => updateTask({ data: v }),
+    mutationFn: (v: { id: string; patch: { status?: "open" | "in_progress" | "done" } }) => updateTask({ data: v }),
     onSuccess: () => qc.invalidateQueries({ queryKey: ["tasks"] }),
   });
   const del = useMutation({

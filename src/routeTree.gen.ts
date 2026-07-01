@@ -13,7 +13,14 @@ import { Route as AuthRouteImport } from './routes/auth'
 import { Route as AuthenticatedRouteImport } from './routes/_authenticated'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ApiChatRouteImport } from './routes/api/chat'
+import { Route as AuthenticatedSettingsRouteImport } from './routes/_authenticated/settings'
+import { Route as AuthenticatedFocusRouteImport } from './routes/_authenticated/focus'
 import { Route as AuthenticatedDashboardRouteImport } from './routes/_authenticated/dashboard'
+import { Route as AuthenticatedChatRouteImport } from './routes/_authenticated/chat'
+import { Route as AuthenticatedToolsResearchRouteImport } from './routes/_authenticated/tools/research'
+import { Route as AuthenticatedToolsPlannerRouteImport } from './routes/_authenticated/tools/planner'
+import { Route as AuthenticatedToolsMeetingRouteImport } from './routes/_authenticated/tools/meeting'
+import { Route as AuthenticatedToolsEmailRouteImport } from './routes/_authenticated/tools/email'
 
 const AuthRoute = AuthRouteImport.update({
   id: '/auth',
@@ -34,44 +41,132 @@ const ApiChatRoute = ApiChatRouteImport.update({
   path: '/api/chat',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AuthenticatedSettingsRoute = AuthenticatedSettingsRouteImport.update({
+  id: '/settings',
+  path: '/settings',
+  getParentRoute: () => AuthenticatedRoute,
+} as any)
+const AuthenticatedFocusRoute = AuthenticatedFocusRouteImport.update({
+  id: '/focus',
+  path: '/focus',
+  getParentRoute: () => AuthenticatedRoute,
+} as any)
 const AuthenticatedDashboardRoute = AuthenticatedDashboardRouteImport.update({
   id: '/dashboard',
   path: '/dashboard',
+  getParentRoute: () => AuthenticatedRoute,
+} as any)
+const AuthenticatedChatRoute = AuthenticatedChatRouteImport.update({
+  id: '/chat',
+  path: '/chat',
+  getParentRoute: () => AuthenticatedRoute,
+} as any)
+const AuthenticatedToolsResearchRoute =
+  AuthenticatedToolsResearchRouteImport.update({
+    id: '/tools/research',
+    path: '/tools/research',
+    getParentRoute: () => AuthenticatedRoute,
+  } as any)
+const AuthenticatedToolsPlannerRoute =
+  AuthenticatedToolsPlannerRouteImport.update({
+    id: '/tools/planner',
+    path: '/tools/planner',
+    getParentRoute: () => AuthenticatedRoute,
+  } as any)
+const AuthenticatedToolsMeetingRoute =
+  AuthenticatedToolsMeetingRouteImport.update({
+    id: '/tools/meeting',
+    path: '/tools/meeting',
+    getParentRoute: () => AuthenticatedRoute,
+  } as any)
+const AuthenticatedToolsEmailRoute = AuthenticatedToolsEmailRouteImport.update({
+  id: '/tools/email',
+  path: '/tools/email',
   getParentRoute: () => AuthenticatedRoute,
 } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
+  '/chat': typeof AuthenticatedChatRoute
   '/dashboard': typeof AuthenticatedDashboardRoute
+  '/focus': typeof AuthenticatedFocusRoute
+  '/settings': typeof AuthenticatedSettingsRoute
   '/api/chat': typeof ApiChatRoute
+  '/tools/email': typeof AuthenticatedToolsEmailRoute
+  '/tools/meeting': typeof AuthenticatedToolsMeetingRoute
+  '/tools/planner': typeof AuthenticatedToolsPlannerRoute
+  '/tools/research': typeof AuthenticatedToolsResearchRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
+  '/chat': typeof AuthenticatedChatRoute
   '/dashboard': typeof AuthenticatedDashboardRoute
+  '/focus': typeof AuthenticatedFocusRoute
+  '/settings': typeof AuthenticatedSettingsRoute
   '/api/chat': typeof ApiChatRoute
+  '/tools/email': typeof AuthenticatedToolsEmailRoute
+  '/tools/meeting': typeof AuthenticatedToolsMeetingRoute
+  '/tools/planner': typeof AuthenticatedToolsPlannerRoute
+  '/tools/research': typeof AuthenticatedToolsResearchRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/_authenticated': typeof AuthenticatedRouteWithChildren
   '/auth': typeof AuthRoute
+  '/_authenticated/chat': typeof AuthenticatedChatRoute
   '/_authenticated/dashboard': typeof AuthenticatedDashboardRoute
+  '/_authenticated/focus': typeof AuthenticatedFocusRoute
+  '/_authenticated/settings': typeof AuthenticatedSettingsRoute
   '/api/chat': typeof ApiChatRoute
+  '/_authenticated/tools/email': typeof AuthenticatedToolsEmailRoute
+  '/_authenticated/tools/meeting': typeof AuthenticatedToolsMeetingRoute
+  '/_authenticated/tools/planner': typeof AuthenticatedToolsPlannerRoute
+  '/_authenticated/tools/research': typeof AuthenticatedToolsResearchRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/auth' | '/dashboard' | '/api/chat'
+  fullPaths:
+    | '/'
+    | '/auth'
+    | '/chat'
+    | '/dashboard'
+    | '/focus'
+    | '/settings'
+    | '/api/chat'
+    | '/tools/email'
+    | '/tools/meeting'
+    | '/tools/planner'
+    | '/tools/research'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/auth' | '/dashboard' | '/api/chat'
+  to:
+    | '/'
+    | '/auth'
+    | '/chat'
+    | '/dashboard'
+    | '/focus'
+    | '/settings'
+    | '/api/chat'
+    | '/tools/email'
+    | '/tools/meeting'
+    | '/tools/planner'
+    | '/tools/research'
   id:
     | '__root__'
     | '/'
     | '/_authenticated'
     | '/auth'
+    | '/_authenticated/chat'
     | '/_authenticated/dashboard'
+    | '/_authenticated/focus'
+    | '/_authenticated/settings'
     | '/api/chat'
+    | '/_authenticated/tools/email'
+    | '/_authenticated/tools/meeting'
+    | '/_authenticated/tools/planner'
+    | '/_authenticated/tools/research'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -111,6 +206,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiChatRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/_authenticated/settings': {
+      id: '/_authenticated/settings'
+      path: '/settings'
+      fullPath: '/settings'
+      preLoaderRoute: typeof AuthenticatedSettingsRouteImport
+      parentRoute: typeof AuthenticatedRoute
+    }
+    '/_authenticated/focus': {
+      id: '/_authenticated/focus'
+      path: '/focus'
+      fullPath: '/focus'
+      preLoaderRoute: typeof AuthenticatedFocusRouteImport
+      parentRoute: typeof AuthenticatedRoute
+    }
     '/_authenticated/dashboard': {
       id: '/_authenticated/dashboard'
       path: '/dashboard'
@@ -118,15 +227,64 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedDashboardRouteImport
       parentRoute: typeof AuthenticatedRoute
     }
+    '/_authenticated/chat': {
+      id: '/_authenticated/chat'
+      path: '/chat'
+      fullPath: '/chat'
+      preLoaderRoute: typeof AuthenticatedChatRouteImport
+      parentRoute: typeof AuthenticatedRoute
+    }
+    '/_authenticated/tools/research': {
+      id: '/_authenticated/tools/research'
+      path: '/tools/research'
+      fullPath: '/tools/research'
+      preLoaderRoute: typeof AuthenticatedToolsResearchRouteImport
+      parentRoute: typeof AuthenticatedRoute
+    }
+    '/_authenticated/tools/planner': {
+      id: '/_authenticated/tools/planner'
+      path: '/tools/planner'
+      fullPath: '/tools/planner'
+      preLoaderRoute: typeof AuthenticatedToolsPlannerRouteImport
+      parentRoute: typeof AuthenticatedRoute
+    }
+    '/_authenticated/tools/meeting': {
+      id: '/_authenticated/tools/meeting'
+      path: '/tools/meeting'
+      fullPath: '/tools/meeting'
+      preLoaderRoute: typeof AuthenticatedToolsMeetingRouteImport
+      parentRoute: typeof AuthenticatedRoute
+    }
+    '/_authenticated/tools/email': {
+      id: '/_authenticated/tools/email'
+      path: '/tools/email'
+      fullPath: '/tools/email'
+      preLoaderRoute: typeof AuthenticatedToolsEmailRouteImport
+      parentRoute: typeof AuthenticatedRoute
+    }
   }
 }
 
 interface AuthenticatedRouteChildren {
+  AuthenticatedChatRoute: typeof AuthenticatedChatRoute
   AuthenticatedDashboardRoute: typeof AuthenticatedDashboardRoute
+  AuthenticatedFocusRoute: typeof AuthenticatedFocusRoute
+  AuthenticatedSettingsRoute: typeof AuthenticatedSettingsRoute
+  AuthenticatedToolsEmailRoute: typeof AuthenticatedToolsEmailRoute
+  AuthenticatedToolsMeetingRoute: typeof AuthenticatedToolsMeetingRoute
+  AuthenticatedToolsPlannerRoute: typeof AuthenticatedToolsPlannerRoute
+  AuthenticatedToolsResearchRoute: typeof AuthenticatedToolsResearchRoute
 }
 
 const AuthenticatedRouteChildren: AuthenticatedRouteChildren = {
+  AuthenticatedChatRoute: AuthenticatedChatRoute,
   AuthenticatedDashboardRoute: AuthenticatedDashboardRoute,
+  AuthenticatedFocusRoute: AuthenticatedFocusRoute,
+  AuthenticatedSettingsRoute: AuthenticatedSettingsRoute,
+  AuthenticatedToolsEmailRoute: AuthenticatedToolsEmailRoute,
+  AuthenticatedToolsMeetingRoute: AuthenticatedToolsMeetingRoute,
+  AuthenticatedToolsPlannerRoute: AuthenticatedToolsPlannerRoute,
+  AuthenticatedToolsResearchRoute: AuthenticatedToolsResearchRoute,
 }
 
 const AuthenticatedRouteWithChildren = AuthenticatedRoute._addFileChildren(
