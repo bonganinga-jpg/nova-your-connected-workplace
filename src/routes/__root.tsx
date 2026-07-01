@@ -1,4 +1,4 @@
-import "@fontsource-variable/inter";
+import "@fontsource-variable/inter/index.css";
 import "@fontsource/fraunces/400.css";
 import "@fontsource/fraunces/600.css";
 
