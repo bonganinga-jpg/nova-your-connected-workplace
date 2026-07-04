@@ -4,11 +4,13 @@ import { ArrowRight, Sparkles, Calendar, Mail, Brain, Focus, HeartPulse, Message
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Nova — Your Intelligent Workplace Assistant" },
+      { title: "Nova — AI Workplace Assistant That Cares" },
       { name: "description", content: "Nova drafts your emails, summarizes meetings, plans your day, and quietly looks out for you. Meet your new AI colleague." },
-      { property: "og:title", content: "Nova — Your Intelligent Workplace Assistant" },
+      { property: "og:title", content: "Nova — AI Workplace Assistant That Cares" },
       { property: "og:description", content: "Nova drafts your emails, summarizes meetings, plans your day, and quietly looks out for you." },
+      { property: "og:url", content: "https://nova-caring-companion.lovable.app/" },
     ],
+    links: [{ rel: "canonical", href: "https://nova-caring-companion.lovable.app/" }],
   }),
   component: Landing,
 });

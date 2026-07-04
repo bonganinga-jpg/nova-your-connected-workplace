@@ -6,7 +6,16 @@ import { toast } from "sonner";
 import { ArrowLeft, Sparkles } from "lucide-react";
 
 export const Route = createFileRoute("/auth")({
-  head: () => ({ meta: [{ title: "Sign in — Nova" }] }),
+  head: () => ({
+    meta: [
+      { title: "Sign in — Nova" },
+      { name: "description", content: "Sign in to Nova or create an account to start drafting emails, planning your day, and working with your AI colleague." },
+      { property: "og:title", content: "Sign in — Nova" },
+      { property: "og:description", content: "Sign in to Nova or create an account to get started." },
+      { property: "og:url", content: "https://nova-caring-companion.lovable.app/auth" },
+    ],
+    links: [{ rel: "canonical", href: "https://nova-caring-companion.lovable.app/auth" }],
+  }),
   component: AuthPage,
 });
 
