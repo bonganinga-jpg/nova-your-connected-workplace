@@ -1,0 +1,10 @@
+# Nova
+
+> Nova is an AI workplace assistant that drafts emails, summarizes meetings, plans your day, and quietly looks out for you — a colleague that cares.
+
+Nova is a productivity companion built for knowledge workers. It combines a threaded AI chat, a smart email generator, a meeting summarizer, an intelligent task planner, a research assistant, and a focus timer, backed by a "caring engine" that nudges you to take breaks and celebrate wins.
+
+## Pages
+
+- [Home](/): Product overview, features, and sign-in.
+- [Sign in](/auth): Sign in or create a Nova account.
