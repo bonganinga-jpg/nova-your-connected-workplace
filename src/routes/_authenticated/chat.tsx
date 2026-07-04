@@ -18,6 +18,7 @@ const searchSchema = z.object({ thread: z.string().uuid().optional() });
 
 export const Route = createFileRoute("/_authenticated/chat")({
   validateSearch: searchSchema,
+  head: () => ({ meta: [{ title: "Chat — Nova" }, { name: "robots", content: "noindex" }] }),
   component: ChatPage,
 });
 
@@ -98,13 +99,14 @@ function ChatPage() {
 
   return (
     <div className="flex h-screen">
+      <h1 className="sr-only">Chat with Nova</h1>
       <div className="flex w-72 shrink-0 flex-col border-r border-border/60 bg-card/30 p-3">
         <Button onClick={() => create.mutate()} className="mb-3" size="sm"><Plus className="mr-2 h-4 w-4" />New chat</Button>
         <div className="flex-1 space-y-1 overflow-y-auto">
           {(threads.data ?? []).map((t) => (
             <div key={t.id} className={`group flex items-center gap-2 rounded-md px-2 py-2 text-sm ${activeId === t.id ? "bg-accent" : "hover:bg-accent/40"}`}>
               <button onClick={() => navigate({ to: "/chat", search: { thread: t.id } })} className="flex-1 truncate text-left">{t.title}</button>
-              <button onClick={() => del.mutate(t.id)} className="opacity-0 group-hover:opacity-100"><Trash2 className="h-3.5 w-3.5 text-muted-foreground hover:text-destructive" /></button>
+              <button aria-label={`Delete conversation ${t.title}`} onClick={() => del.mutate(t.id)} className="opacity-0 group-hover:opacity-100"><Trash2 className="h-3.5 w-3.5 text-muted-foreground hover:text-destructive" /></button>
             </div>
           ))}
           {(threads.data ?? []).length === 0 && <p className="px-2 py-4 text-xs text-muted-foreground">No conversations yet.</p>}
@@ -147,7 +149,7 @@ function ChatPage() {
               className="min-h-[44px] resize-none"
               onKeyDown={(e) => { if (e.key === "Enter" && !e.shiftKey) { e.preventDefault(); send(input); } }}
             />
-            <Button type="submit" disabled={busy || !input.trim() || !token} size="icon" className="h-11 w-11 shrink-0"><Send className="h-4 w-4" /></Button>
+            <Button type="submit" aria-label="Send message" disabled={busy || !input.trim() || !token} size="icon" className="h-11 w-11 shrink-0"><Send className="h-4 w-4" /></Button>
           </form>
         </div>
       </div>

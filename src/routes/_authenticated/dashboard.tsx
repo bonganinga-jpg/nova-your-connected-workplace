@@ -10,6 +10,13 @@ import { useMemo, useState } from "react";
 import { toast } from "sonner";
 
 export const Route = createFileRoute("/_authenticated/dashboard")({
+  head: () => ({
+    meta: [
+      { title: "Dashboard — Nova" },
+      { name: "description", content: "Your daily command center — priorities, weekly progress, and gentle nudges from Nova." },
+      { name: "robots", content: "noindex" },
+    ],
+  }),
   component: DashboardPage,
 });
 
@@ -96,7 +103,7 @@ function DashboardPage() {
                 {n.cta && n.kind === "break_reminder" && (
                   <Button size="sm" variant="secondary" onClick={() => navigate({ to: "/focus" })}>{n.cta}</Button>
                 )}
-                <Button size="icon" variant="ghost" onClick={() => dismiss.mutate(n.kind)}><X className="h-4 w-4" /></Button>
+                <Button size="icon" variant="ghost" aria-label="Dismiss nudge" onClick={() => dismiss.mutate(n.kind)}><X className="h-4 w-4" /></Button>
               </div>
             </Card>
           ))}

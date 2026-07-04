@@ -11,6 +11,7 @@ import { Sparkles, Loader2, Copy } from "lucide-react";
 import { toast } from "sonner";
 
 export const Route = createFileRoute("/_authenticated/tools/email")({
+  head: () => ({ meta: [{ title: "Smart Email — Nova" }, { name: "robots", content: "noindex" }] }),
   component: EmailPage,
 });
 
@@ -86,7 +87,7 @@ function EmailPage() {
                   <Label className="text-xs uppercase tracking-wider text-muted-foreground">Subject</Label>
                   <p className="font-medium">{result.subject}</p>
                 </div>
-                <Button variant="ghost" size="icon" onClick={() => copy(`Subject: ${result.subject}\n\n${result.body}`)}><Copy className="h-4 w-4" /></Button>
+                <Button variant="ghost" size="icon" aria-label="Copy email to clipboard" onClick={() => copy(`Subject: ${result.subject}\n\n${result.body}`)}><Copy className="h-4 w-4" /></Button>
               </div>
               <div>
                 <Label className="text-xs uppercase tracking-wider text-muted-foreground">Body</Label>
