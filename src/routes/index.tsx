@@ -11,6 +11,27 @@ export const Route = createFileRoute("/")({
       { property: "og:url", content: "https://nova-caring-companion.lovable.app/" },
     ],
     links: [{ rel: "canonical", href: "https://nova-caring-companion.lovable.app/" }],
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "WebSite",
+          name: "Nova",
+          url: "https://nova-caring-companion.lovable.app/",
+        }),
+      },
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          name: "Nova",
+          url: "https://nova-caring-companion.lovable.app/",
+          description: "Nova is an AI workplace assistant that drafts emails, summarizes meetings, plans your day, and quietly looks out for you.",
+        }),
+      },
+    ],
   }),
   component: Landing,
 });
